@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from HW4_mydijkastra2 import dijkstra_algorithm_function
+from HW4_mydijkastra2 import dijkstra
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ def shortest_path():
     destination = int(request.args.get('destination'))
 
 
-    dist, prev = dijkstra_algorithm_function(adj_matrix6, origin)
+    dist, prev = dijkstra(adj_matrix6, origin)
 
     shortest_path = []
     while destination is not None:
