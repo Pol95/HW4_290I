@@ -65,7 +65,8 @@ class PriorityQueue:
             k = j
     def contains(self, name):
             return name in self.qp
-
+        
+import scipy.io #import mathlab tabs
 graph6 = scipy.io.loadmat('/runWEB/HW4_290I-main/graph6.mat')
 
 import numpy as np
