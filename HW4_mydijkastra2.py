@@ -154,4 +154,4 @@ def shortest_path():
     return jsonify({"shortest_path": path, "shortest_distance": dist[destination]})
 
 if __name__ == "__main__":
-    app.run(host='54.177.240.19', port=80)  # Run the server on port 5000
+    app.run(host='172.31.20.194', port=80)  
