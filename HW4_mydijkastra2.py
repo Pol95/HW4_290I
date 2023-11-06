@@ -67,7 +67,7 @@ class PriorityQueue:
             return name in self.qp
         
 import scipy.io #import mathlab tabs
-graph6 = scipy.io.loadmat('/runWEB/HW4_290I-main/graph6.mat')
+graph6 = scipy.io.loadmat('./graph6.mat')
 
 import numpy as np
 
