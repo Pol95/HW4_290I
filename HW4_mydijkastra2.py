@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
-
-app = Flask(__name__)
+import numpy as np
+import scipy.io
 
 class PriorityQueue:
     def __init__(self):
@@ -137,21 +137,35 @@ def main():
 if __name__ == "__main__":
       main()
 
-@app.route('/shortest_path', methods=['GET'])
+app = Flask(__name__)
+
+# Endpoint to handle Dijkstra requests
+@app.route('/shortest-path', methods=['POST'])
 def shortest_path():
-    origin = int(request.args.get('origin'))
-    destination = int(request.args.get('destination'))
-    
+    data = request.get_json()
+    origin = data.get('origin')
+    destination = data.get('destination')
+
+    if origin is None or destination is None:
+        return jsonify({"error": "Please provide both origin and destination."}), 400
+
+    if origin < 0 or destination < 0 or origin >= num_nodes6 or destination >= num_nodes6:
+        return jsonify({"error": "Invalid origin or destination node."}), 400
+
     # Run Dijkstra's algorithm
-    dist, prev = dijkstra(adj_matrix6, origin)
-    
-    # Retrieve the shortest path from the 'prev' array
+    dist, prev = dijkstra(adjacency_matrix6, origin)
+
+    # Retrieve the shortest path
     path = []
-    while destination is not None:
-        path.insert(0, destination)
-        destination = prev[destination]
-    
-    return jsonify({"shortest_path": path, "shortest_distance": dist[destination]})
+    dest = destination
+    while dest is not None:
+        path.insert(0, dest)
+        dest = prev[dest]
+
+    return jsonify({
+        "shortest_path": path,
+        "shortest_distance": dist[destination]
+    })
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8501)  
+    app.run(host='0.0.0.0', port=5000)
