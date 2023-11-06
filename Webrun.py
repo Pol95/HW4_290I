@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from HW4_mydijkstra import dijkstra_algorithm_function
+from HW4_mydijkastra2 import dijkstra_algorithm_function
 
 app = Flask(__name__)
 
